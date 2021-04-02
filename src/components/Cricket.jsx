@@ -1,201 +1,92 @@
 import React from "react";
-const score = [
-  {
-    status: 200,
-    message: "Sucessful",
-    data: {
-      generated_at: "2021-03-23T04:44:50+00:00",
-      schema:
-        "http://schemas.sportradar.com/bsa/cricket/v1/json/endpoints/cricket/match_timeline.json",
-      sport_event: {
-        id: "sr:match:25722956",
-        scheduled: "2021-03-20T13:30:00+00:00",
-        start_time_tbd: false,
-        tournament_round: {
-          type: "group",
-          number: 1,
-        },
-        season: {
-          id: "sr:season:81710",
-          name: "T20 Series India vs. England 2021",
-          start_date: "2021-03-12",
-          end_date: "2021-03-18",
-          year: "2021",
-          tournament_id: "sr:tournament:33830",
-        },
-        tournament: {
-          id: "sr:tournament:33830",
-          name: "T20 Series India vs. England",
-          sport: {
-            id: "sr:sport:21",
-            name: "Cricket",
-          },
-          category: {
-            id: "sr:category:105",
-            name: "International",
-          },
-          type: "t20i",
-          gender: "men",
-          tour_id: "sr:tour:33722",
-        },
-        tour: {
-          id: "sr:tour:33722",
-          name: "England tour of India",
-        },
-        competitors: [
-          {
-            id: "sr:competitor:107203",
-            name: "India",
-            country: "India",
-            country_code: "IND",
-            abbreviation: "IND",
-            qualifier: "home",
-          },
-          {
-            id: "sr:competitor:107205",
-            name: "England",
-            country: "England",
-            country_code: "ENG",
-            abbreviation: "ENG",
-            qualifier: "away",
-          },
-        ],
-        venue: {
-          id: "sr:venue:26437",
-          name: "Sardar Patel Stadium",
-          capacity: 48000,
-          city_name: "Ahmedabad",
-          country_name: "India",
-          map_coordinates: "23.091682,72.597498",
-          country_code: "IND",
-          bowling_ends: [
-            {
-              name: "Adani Pavilion End",
-            },
-            {
-              name: "GMDC End",
-            },
-          ],
-        },
-      },
-      sport_event_conditions: {
-        day_night: "day/night",
-        type: "t20i",
-        weather_info: {
-          weather_conditions: "raining",
-        },
-        pitch_info: {
-          pitch_conditions: "dry",
-        },
-        outfield_info: {
-          outfield_conditions: "fast",
-        },
-        referees: {
-          referee: {
-            id: "sr:referee:670116",
-            name: "Srinath, Javagal",
-          },
-          umpires: [
-            {
-              id: "sr:umpire:645782",
-              number: 1,
-              name: "Chaudhary, Anil",
-              type: "on_field",
-            },
-            {
-              id: "sr:umpire:659154",
-              number: 2,
-              name: "Menon, Nitin",
-              type: "on_field",
-            },
-            {
-              id: "sr:umpire:645114",
-              number: 3,
-              name: "Ananthapadmanabhan, KN",
-              type: "3rd",
-            },
-          ],
-        },
-      },
-      sport_event_status: {
-        match_status: "ended",
-        status: "closed",
-        toss_won_by: "sr:competitor:107205",
-        toss_decision: "bowl",
-        display_score: "188/8",
-        display_overs: 20,
-        current_inning: 2,
-        winner_id: "sr:competitor:107203",
-        match_result: "India beat England by 36 runs",
-        match_result_type: "r",
-        run_rate: "9.40",
-        margin: 36,
-        allotted_overs: 20,
-        target: 225,
-        equation: "India beat England by 36 runs",
-        period_scores: [
-          {
-            home_score: 224,
-            home_wickets: 2,
-            display_score: "224/2",
-            display_overs: 20,
-            type: "inning",
-            number: 1,
-            allotted_overs: 20,
-          },
-          {
-            away_score: 188,
-            away_wickets: 8,
-            display_score: "188/8",
-            display_overs: 20,
-            type: "inning",
-            number: 2,
-            allotted_overs: 20,
-          },
-        ],
-      },
-      coverage_info: {
-        live_coverage: true,
-        level: "8",
-      },
-    },
-  },
-];
+import { Card, CardTitle, CardText, Row, Col, Container } from "reactstrap";
+import Indiaflag from "../Assets/india.png";
+import Englandflag from "../Assets/england.png";
+import PropTypes from "prop-types";
 
 const style = {
-  border: "2px solid red",
-  borderRadius: "5px",
+  margin: "auto",
+  width: "50%",
+  padding: "10px",
+  marginRight: "250px",
 };
 
-const Cricket = () => {
+const Cricket = ({ score }) => {
   return (
     <div style={style}>
-      {score.map((score) => (
-        <div key="index">
-          <h1>{score.data.sport_event.season.name}</h1>
-          <p>{score.data.sport_event.venue.name}</p>
-          <strong>{score.data.sport_event_status.match_result}</strong>
-          <br />
-          <br />
-          <div>
-            <h5>{score.data.sport_event.competitors[0].country_code}</h5>
-            <p>
-              {" "}
-              {score.data.sport_event_status.period_scores[0].display_score} (
-              {score.data.sport_event_status.period_scores[0].display_overs} ov)
-            </p>
-            <p>VS</p>
-            <h5>{score.data.sport_event.competitors[1].country_code}</h5>
-            <p>
-              {" "}
-              {score.data.sport_event_status.period_scores[1].display_score} (
-              {score.data.sport_event_status.period_scores[1].display_overs} ov)
-            </p>
-          </div>
-        </div>
-      ))}
+      <Container style={{ width: "1000px" }}>
+        <Row>
+          <Col sm="6">
+            <Card body>
+              <CardTitle tag="h5">
+                {score.data.sport_event.tournament.name}
+              </CardTitle>
+              <p>{score.data.sport_event.venue.name}</p>
+              <strong>{score.data.sport_event_status.match_result}</strong>
+              <br />
+              <CardText>
+                <div
+                  style={{ display: "flex", justifyContent: "space-evenly" }}
+                >
+                  <Col>
+                    <h5>
+                      {score.data.sport_event.competitors[0].country_code}
+                    </h5>
+                    <img
+                      src={Indiaflag}
+                      alt="Ind"
+                      className="Country-Flag"
+                    ></img>{" "}
+                    <p>
+                      {" "}
+                      {
+                        score.data.sport_event_status.period_scores[0]
+                          .display_score
+                      }
+                      <br />(
+                      {
+                        score.data.sport_event_status.period_scores[0]
+                          .display_overs
+                      }
+                      ov)
+                    </p>
+                  </Col>
+
+                  <p>VS</p>
+                  <Col>
+                    <h5>
+                      {score.data.sport_event.competitors[1].country_code}
+                    </h5>
+                    <img
+                      src={Englandflag}
+                      alt="Eng"
+                      className="Country-Flag"
+                    ></img>
+                    <p>
+                      {
+                        score.data.sport_event_status.period_scores[1]
+                          .display_score
+                      }
+                      <br /> (
+                      {
+                        score.data.sport_event_status.period_scores[1]
+                          .display_overs
+                      }
+                      ov)
+                    </p>
+                  </Col>
+                </div>
+              </CardText>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
+};
+
+Cricket.propTypes = {
+  score: PropTypes.object,
 };
 
 export default Cricket;
